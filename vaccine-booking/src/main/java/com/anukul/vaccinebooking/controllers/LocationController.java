@@ -33,9 +33,9 @@ public class LocationController {
         locationService.save(location);
     }
 
-    @GetMapping("/getSlots/{locationId}")
-    public List<Slot> getAllSlots(@PathVariable int locationId){
-        return locationService.getAllSlots(locationId);
+    @GetMapping("/getSlotsByLocation/{locationId}")
+    public List<Slot> getAllSlotsByLocation(@PathVariable int locationId) throws Exception {
+        return locationService.getAllSlotsByLocation(locationId);
     }
 
 

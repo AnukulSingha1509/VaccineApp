@@ -15,6 +15,9 @@ public class LocationService {
     @Autowired
     LocationRepository locationRepository;
 
+    @Autowired
+    SlotService slotService;
+
 
     public Location getLocationById(int locationId) throws Exception {
         // TODO Auto-generated method stub
@@ -30,9 +33,16 @@ public class LocationService {
         locationRepository.save(location);
     }
 
-    public List<Slot> getAllSlots(int locationId) {
+    public List<Slot> getAllSlotsByLocation(int locationId) throws Exception {
         //return new ArrayList<Slot>();
-        return locationRepository.getAllSlots(locationId);
+        List<Integer> slotIds= locationRepository.getAllSlots(locationId);
+        List<Slot> listOfSLots= new ArrayList<>();
+
+        for(int slotId: slotIds){
+            listOfSLots.add(slotService.getSlotById(slotId));
+        }
+
+        return listOfSLots;
     }
 }
 

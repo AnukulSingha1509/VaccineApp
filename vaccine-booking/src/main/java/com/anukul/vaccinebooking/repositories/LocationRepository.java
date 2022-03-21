@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
 
-    @Query(value="SELECT * FROM slots s WHERE s.location_id= ?1; ", nativeQuery = true)
-    List<Slot> getAllSlots(int locationId);
+    @Query(value="SELECT slot_id FROM slots WHERE location_id= ?1 ", nativeQuery = true)
+    List<Integer> getAllSlots(int locationId);
 }

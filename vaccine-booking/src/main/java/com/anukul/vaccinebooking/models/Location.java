@@ -33,6 +33,7 @@ public class Location {
     @Max(999999)
     private Integer pincode;
 
+    @JsonIgnore
               //mappedBy will prevent hibernate from creating a separate location_slot table
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)  //"location" is attribute name of Location in slot class
     private List<Slot> slots;
