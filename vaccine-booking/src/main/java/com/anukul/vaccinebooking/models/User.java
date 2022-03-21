@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue
@@ -25,11 +25,16 @@ public class Users {
     @NotNull
     private String address;
 
+    @Column(unique = true, nullable = false)
+    private String govtID;
+
     @NotNull
     private Date DOB;
 
-    @NotNull
-    @Column(length = 10)
+    @Column(length = 10,unique = true, nullable = false)
     private String phoneNo;
+
+    @Transient
+    private int Age;
 
 }
