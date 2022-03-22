@@ -16,4 +16,14 @@ public class BookingController {
         return bookingService.bookSlotForUser(slotId, userId);
     }
 
+    @PostMapping("cancelBooking/{userId}")
+    public String cancelBooking(@PathVariable int userId) throws Exception {
+        return bookingService.cancelBooking(userId);
+    }
+
+    @PostMapping("completeBooking/{userId}")
+    public String completeBooking(@PathVariable int userId){
+        return bookingService.completeBooking(userId);
+    }
+
 }

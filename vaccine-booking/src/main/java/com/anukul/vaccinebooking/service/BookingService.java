@@ -5,6 +5,7 @@ import com.anukul.vaccinebooking.repositories.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.sound.midi.SysexMessage;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -88,6 +89,8 @@ public class BookingService {
         return "Booking successful with ref id: "+booking.getReferenceId();
     }
 
+
+
     private boolean MinDaysGapNotCompleted(List<Booking> completedBookings, Slot slot) {
         if(slot.getVaccine()==Vaccine.SPUTNIK){
             return false;
@@ -134,5 +137,45 @@ public class BookingService {
             return true;
         }
         return false;
+    }
+
+
+    private Booking getBooking(int bookingId){
+        return bookingRepository.getById(bookingId);
+    }
+
+    public String completeBooking(int userId){
+
+        try{
+            Booking pendingBooking= getBooking((bookingRepository.getPendingBooking(userId)));
+
+            pendingBooking.setCompletionStatus(CompletionStatus.COMPLETED);
+            bookingRepository.save(pendingBooking);
+
+            return "Booking : "+pendingBooking.getReferenceId()+" completed";
+
+        }catch(NullPointerException e){
+            return "No pending booking found for user";
+        }
+
+    }
+
+    public String cancelBooking(int userId) throws Exception {
+
+        try{
+            Booking pendingBooking= getBooking(bookingRepository.getPendingBooking(userId));
+            Slot slot= pendingBooking.getSlot();
+            slot.setDosesAvailable(slot.getDosesAvailable()+1);
+            slotService.addOrUpdateSlot(slot);
+
+            pendingBooking.setCompletionStatus(CompletionStatus.CANCELLED);
+            bookingRepository.save(pendingBooking);
+
+            return "Booking with booking id: "+pendingBooking.getReferenceId()+"+ is cancelled";
+
+        }catch (NullPointerException e){
+            return "No pending booking found for user.";
+        }
+
     }
 }
