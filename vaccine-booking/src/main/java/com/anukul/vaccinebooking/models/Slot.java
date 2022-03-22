@@ -7,7 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name="Slots")
@@ -23,7 +23,6 @@ public class Slot {
     @GeneratedValue
     private Integer slotId;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name="location_id")
     private Location location;
