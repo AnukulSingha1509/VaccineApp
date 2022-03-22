@@ -24,10 +24,8 @@ public class SlotService {
         return slotRepository.findAll();
     }
 
-    public void addSlot(Slot slot, int locationId) throws Exception {
+    public void addOrUpdateSlot(Slot slot) throws Exception {
 
-//        Location thisLocation= locationService.getLocationById(locationId);
-//        slot.setLocation(thisLocation);
-//        slotRepository.save(slot);
+        slotRepository.save(slot);
     }
 }

@@ -1,5 +1,6 @@
 package com.anukul.vaccinebooking.service;
 
+import com.anukul.vaccinebooking.models.Booking;
 import com.anukul.vaccinebooking.models.User;
 import com.anukul.vaccinebooking.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,11 @@ public class UserService {
 
     public void addNewUser(User user) {
         userRepository.save(user);
+    }
+
+    public List<Booking> getAllBookingsForUser(int userId) throws Exception {
+        User user= getUserById(userId);
+        return user.getBookings();
+
     }
 }

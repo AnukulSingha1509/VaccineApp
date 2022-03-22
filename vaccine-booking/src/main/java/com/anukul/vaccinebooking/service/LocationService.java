@@ -34,15 +34,9 @@ public class LocationService {
     }
 
     public List<Slot> getAllSlotsByLocation(int locationId) throws Exception {
-        //return new ArrayList<Slot>();
-        List<Integer> slotIds= locationRepository.getAllSlots(locationId);
-        List<Slot> listOfSLots= new ArrayList<>();
 
-        for(int slotId: slotIds){
-            listOfSLots.add(slotService.getSlotById(slotId));
-        }
-
-        return listOfSLots;
+        Location location= getLocationById(locationId);
+        return location.getSlots();
     }
 }
 

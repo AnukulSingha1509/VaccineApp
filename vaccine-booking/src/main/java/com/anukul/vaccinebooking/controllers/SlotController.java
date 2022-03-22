@@ -26,9 +26,9 @@ public class SlotController {
         return slotService.getAllSlots();
     }
 
-    @PostMapping("/add/{location_id}")
-    public void addSlot(@RequestBody Slot slot, @PathVariable int location_id) throws Exception {
-        slotService.addSlot(slot, location_id);
+    @PostMapping("/add")
+    public void addOrUpdateSlot(@RequestBody Slot slot) throws Exception {
+        slotService.addOrUpdateSlot(slot);
     }
 
 }

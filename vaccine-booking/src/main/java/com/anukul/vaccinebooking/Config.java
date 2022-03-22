@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
-@Component
+//@Component
 public class Config {
 
     @Autowired

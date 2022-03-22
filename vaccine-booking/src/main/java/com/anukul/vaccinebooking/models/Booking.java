@@ -19,7 +19,7 @@ public class Booking {
     private Integer bookingId;
 
     @Column(unique = true, nullable = false)
-    private Integer referenceId;
+    private String referenceId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
